@@ -1,0 +1,142 @@
+1.What is closure?
+A closure is a function that retains access to its parent scope even after the parent function has finished executing. 
+Closures allow functions to remember variables from their lexical scope.
+
+function outerFunction(outerVariable) {
+return function innerFunction(innerVariable) {
+console.log(`Outer: ${outerVariable}, Inner: ${innerVariable}`);
+};
+}
+
+const closureExample = outerFunction("Hello");
+closureExample("World"); // Output: Outer: Hello, Inner: World
+
+what is jwt?
+JWT (JSON Web Token) is a compact, self-contained token used for securely transmitting information between parties as a JSON object. 
+It is commonly used for authentication and authorization.
+
+JWT Structure:
+JWT consists of three parts:
+Header.Payload.Signature eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTYifQ.2O7zAY56F
+
+🔹 How JWT Works?
+
+User logs in → Server generates JWT and sends it to the client.
+Client stores JWT (usually in localStorage or cookies).
+Client includes JWT in requests (Authorization header).
+Server verifies JWT and grants access.
+🔹 Example in Node.js:
+
+const jwt = require("jsonwebtoken");
+
+const token = jwt.sign({ userId: "123456" }, "secretKey", { expiresIn: "1h" });
+console.log(token);
+
+3..what is middleware
+
+Middleware is a function that runs between the request and the response in a web server. Middleware can modify, process, or validate requests before reaching the final endpoint.
+const express = require("express");
+const app = express();
+
+// Middleware function
+app.use((req, res, next) => {
+console.log("Middleware executed!");
+next(); // Pass control to the next handler
+});
+
+app.get("/", (req, res) => {
+res.send("Hello, World!");
+});
+
+app.listen(3000);
+
+Types of Middleware:
+
+Authentication Middleware
+Logging Middleware
+Error Handling Middleware
+
+what is hooks?
+Hooks are functions that let you use React features (state, lifecycle, context, etc.) inside functional components.
+
+Common Hooks:
+useState → Manage state inside a function component.
+useEffect → Handle side effects (API calls, event listeners).
+useContext → Use global state from React.Context.
+useReducer → Alternative to useState, useful for complex state logic.
+Example (useState & useEffect):
+
+import { useState, useEffect } from "react";
+
+function Counter() {
+const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        console.log("Component Mounted");
+    }, []);
+
+    return <button onClick={() => setCount(count + 1)}>Click {count}</button>;
+
+}
+
+when 4 more than admin when admin is delete another admin data ,how handle it these situation?
+If there are more than 4 admins and one tries to delete another, you need to enforce rules to prevent unauthorized deletions.
+
+Solution 1: Prevent Deletion If 4 or Fewer Admins Remain
+javascript
+Copy
+Edit
+const deleteAdmin = async (req, res) => {
+const { adminId } = req.params;
+
+    // Count the number of current admins
+    const adminCount = await Admin.countDocuments({ role: "admin" });
+
+    if (adminCount <= 4) {
+        return res.status(400).json({ message: "At least 4 admins must remain." });
+    }
+
+    await Admin.findByIdAndDelete(adminId);
+    res.json({ message: "Admin deleted successfully." });
+
+};
+
+what is hashing?
+Hashing is the process of converting data into a fixed-length string using a mathematical algorithm.
+ It is commonly used for password storage and data integrity checks.
+
+🔹 Example of Hashing (Node.js + bcrypt):
+
+javascript
+Copy
+Edit
+const bcrypt = require("bcrypt");
+
+const hashPassword = async (password) => {
+const salt = await bcrypt.genSalt(10);
+const hashedPassword = await bcrypt.hash(password, salt);
+console.log(hashedPassword);
+};
+
+hashPassword("mySecurePassword");
+🔹 Hashing Characteristics:
+
+One-way process (cannot be reversed).
+Different outputs for the same input (due to salting).
+Used for password storage and security.
+Final Summary:
+Concept Explanation
+Closure Function remembers variables from its outer scope.
+JWT Secure token for authentication (Header.Payload.Signature).
+Middleware Function that runs before request reaches the endpoint.
+Hooks React functions (useState, useEffect) for managing component behavior.
+Admin Deletion Rule Prevents deletion if admins are 4 or fewer; can require approval.
+Hashing Converts data into fixed-length, irreversible string (used for passwords).
+
+what are Life cycle Methods
+Life Cycle Phases in Class Components
+A React component's life cycle consists of three phases:
+
+Mounting (Component is created and added to the DOM)
+Updating (Component updates due to state/prop changes)
+Unmounting (Component is removed from the DOM)

@@ -1,0 +1,49 @@
+import "./styles.css";
+import { useState, useEffect } from "react";
+
+export default function App() {
+const [start, SetStart] = useState(0);
+const [stop, SetStop] = useState(false);
+const [pause, SetPause] = useState(false);
+let timerId;
+
+useEffect(() => {
+if (!stop && !pause) {
+timerId = setInterval(() => {
+SetStart((prev) => prev + 1);
+}, 1000);
+}
+
+    return () => clearInterval(timerId);
+
+}, [stop, pause]);
+
+const handleStart = () => {
+SetStop(false);
+SetPause(false);
+};
+
+const handleStop = () => {
+SetStop(true);
+SetStart(0);
+};
+
+const handlePause = () => {
+SetPause(true);
+};
+
+return (
+<>
+
+<h1>Timer</h1>
+<p>{start}</p>
+<button onClick={handleStart} disabled={!stop && !pause}>
+Start
+</button>
+<button onClick={handleStop}>Stop</button>
+<button onClick={handlePause} disabled={pause}>
+Pause
+</button>
+</>
+);
+}

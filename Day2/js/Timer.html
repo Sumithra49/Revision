@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Timer (MM:SS)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 50px;
+      }
+      .counter {
+        font-size: 50px;
+        font-weight: bold;
+        margin: 20px;
+      }
+      button {
+        font-size: 18px;
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JavaScript Timer (MM:SS)</h1>
+    <div class="counter" id="counter">00:00</div>
+
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="resetTimer()">Reset</button>
+
+    <script>
+      let minutes = 0,
+        seconds = 0;
+      let timer = null;
+
+      function formatTime(min, sec) {
+        return `${min.toString().padStart(2, "0")}:${sec
+          .toString()
+          .padStart(2, "0")}`;
+      }
+
+      function updateDisplay() {
+        document.getElementById("counter").innerText = formatTime(
+          minutes,
+          seconds
+        );
+      }
+
+      function startTimer() {
+        if (!timer) {
+          // Prevent multiple intervals
+          timer = setInterval(() => {
+            seconds++;
+            if (seconds === 60) {
+              seconds = 0;
+              minutes++;
+            }
+            updateDisplay();
+          }, 1000);
+        }
+      }
+
+      function stopTimer() {
+        clearInterval(timer);
+        timer = null; // Reset timer variable
+      }
+
+      function resetTimer() {
+        stopTimer(); // Stop before resetting
+        minutes = 0;
+        seconds = 0;
+        updateDisplay();
+      }
+
+      updateDisplay(); // Initial display update
+    </script>
+  </body>
+</html>

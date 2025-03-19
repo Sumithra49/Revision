@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+      }
+      .form-container {
+        width: 300px;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      input {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        padding: 10px;
+        background-color: blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: darkblue;
+      }
+      .output {
+        margin-top: 15px;
+        padding: 10px;
+        background: #e3f2fd;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>JavaScript Form</h2>
+      <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <!-- Display submitted data -->
+      <div id="output" class="output"></div>
+    </div>
+
+    <script>
+      // Select the form and output div
+      const form = document.getElementById("myForm");
+      const output = document.getElementById("output");
+
+      // Handle form submission
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent page refresh
+
+        // Get form values
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Display submitted data
+        output.innerHTML = `
+                <h3>Entered Data:</h3>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Password:</strong> ${password}</p>
+            `;
+
+        // Optionally reset the form
+        form.reset();
+      });
+    </script>
+  </body>
+</html>

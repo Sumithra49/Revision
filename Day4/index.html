@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* reusable */
+
+    .capsule {
+      height: 26px;
+      line-height: 26px;
+      border-radius: 10px;
+    }
+
+    #navbar {
+      border: 1px solid green;
+    }
+
+    #main_container {
+      display: flex;
+    }
+
+    .container {
+      margin-bottom: 80px;
+      margin-top: 20px;
+    }
+
+    .sidebar-one {
+      border: 1px solid #e1e1e1;
+      border-radius: 4px;
+      padding: 16px;
+    }
+
+    .student {
+      width: 260px;
+      height: 450px;
+      border: 1px solid gray;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px;
+    }
+
+    .student img {
+      width: 80%;
+      height: 40%;
+      border-bottom: 1px solid gray;
+    }
+
+    .student div {
+      width: 80%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* cards */
+
+    /* card list */
+    .card-list {
+      display: flex;
+      flex-wrap: wrap;
+      flex-basis: 100%;
+      gap: 4%;
+    }
+
+    .card:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 300px) {
+      .card {
+        flex-basis: 100%;
+      }
+    }
+
+    @media (min-width: 576px) {
+      .card {
+        flex-basis: 38%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        flex-basis: 100%;
+      }
+    }
+
+    /* individual card  */
+    .card {
+      background-color: white;
+      font-size: 20px;
+      padding: 15px;
+
+      border: 1px solid #e1e1e1;
+      border-radius: 4px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 4%;
+    }
+
+    .card-item:not(:last-child) {
+      margin-bottom: 8px;
+    }
+
+    .card-image {
+      margin-bottom: 8px;
+      height: 120px;
+      flex-shrink: 0;
+    }
+
+    .card-image img {
+      height: 120px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .card-link {
+      font-family: "verdana", "sans-serif";
+      font-size: 15px;
+      color: #1c1c1c;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        flex-direction: row;
+      }
+
+      .card-image {
+        flex-basis: 33%;
+        margin: 0;
+        height: auto;
+        max-height: 120px;
+      }
+
+      .card-image img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .card-title {
+      margin: 0;
+      color: #1c1c1c;
+      font-size: 18px;
+    }
+
+    .card-image {
+      /* background-color: dodgerblue; */
+    }
+
+    .card-description {
+      font-size: 15px;
+      color: #696969;
+      line-height: 1.5;
+    }
+
+    .card-additional-info {
+      margin: 0;
+      color: #1c1c1c;
+      font-size: 15px;
+    }
+
+    /* pagination section */
+    /* .pagination-wrapper {
+      // border: 1px dashed #E1E1E1;
+      // border-radius: 4px;
+      // margin-top: 16px;
+      // display: flex;
+      // flex-direction: row;
+      // justify-content: center;
+      // align-items: center;
+      // padding: 16px;
+    } */
+
+    .notification.info {
+      background-color: #33c3f0;
+      border-color: #33c3f0;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .todo-list-wrapper input {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+      line-height: 24px;
+    }
+
+    .todo-list-wrapper label {
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    .muted {
+      color: #696969;
+    }
+
+    .italic {
+      font-style: italic;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="main">
+        <div class="row">
+          <h4>Proffesional DOM Manipulation</h4>
+          <button id="load-data" class="u-full-width button button-primary">
+            Load Data
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="notifications-wrapper" id="notifications-wrapper"></div>
+          <div class="data-list-wrapper" id="data-list-wrapper">
+            The card is to be shown here.
+          </div>
+          <div class="pagination-wrapper" id="pagination-wrapper"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  let mainSection = document.getElementById("data-list-wrapper");
+  let loadDataButton = document.getElementById("load-data");
+  let url = "https://reqres.in/api/users";
+
+  loadDataButton.addEventListener("click", () => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        mainSection.innerHTML = null;
+
+        let cardList = document.createElement("div");
+        cardList.classList.add("card-list");
+        mainSection.appendChild(cardList);
+        data.data.forEach((item) => {
+          let card = document.createElement("div");
+          card.classList.add("card");
+          card.setAttribute("data-id", item.id);
+
+          let cardImage = document.createElement("div");
+          cardImage.classList.add("card-image");
+          let img = document.createElement("img");
+          img.src = item.avatar;
+          img.setAttribute("alt", "food");
+          cardImage.appendChild(img);
+
+          //cardBody
+          let cardBody = document.createElement("div");
+          cardBody.classList.add("card-body");
+          let h3 = document.createElement("h3");
+          h3.classList.add("card-item");
+          h3.classList.add("card-title");
+          h3.innerText = item.first_name + " " + item.last_name;
+
+          let description = document.createElement("div");
+          description.classList.add("card-item");
+          description.classList.add("card-description");
+          description.innerText = item.email;
+
+          let link = document.createElement("a");
+          link.classList.add("card-item");
+          link.classList.add("card-link");
+          link.href = "#";
+          link.setAttribute("data-id", item.id);
+          link.setAttribute(
+            "data-name",
+            item.first_name + " " + item.last_name
+          );
+          link.innerText = "EDIT";
+
+          cardBody.appendChild(h3);
+          cardBody.appendChild(description);
+          cardBody.appendChild(link);
+          card.appendChild(cardImage);
+          card.appendChild(cardBody);
+          cardList.appendChild(card);
+        });
+      });
+  });
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+</html>
+<script>
+  const container = document.getElementById("container");
+  const card = document.createElement("div");
+  card.classList.add("card");
+  const img = document.createElement("img");
+  img.src =
+    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRmssBxe-Bksn8pbj4kZzW8tfACL5s0GhsI2HdK5B5IDovCPbO9fV_QVGXp3lHW4N5w8GqjA20L_IPszxhe6sUyVS2uBIw_47KJdm3zwYercy6sUa6ORECfzGJqsmTy0D-LZVn660Q&usqp=CAc";
+  img.alt = "pic";
+
+  const title = document.createElement("p");
+  title.textContent = "flower";
+  const button = document.createElement("button");
+  button.innerText = "learmore";
+  button.onclick = () => {
+    alert("beautiful flower");
+  };
+  card.appendChild(img);
+  card.appendChild(title);
+  card.appendChild(button);
+  container.appendChild(card);
+</script>
