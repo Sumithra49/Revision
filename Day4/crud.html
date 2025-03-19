@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+</html>
+<script>
+  const container = document.getElementById("container");
+  const heading = document.createElement("h1");
+  heading.innerText = "Registration Form";
+  container.appendChild(heading);
+  const form = document.createElement("form");
+  const input = document.createElement("input");
+  input.type = "text";
+  input.placeholder = "Your Name";
+  form.appendChild(input);
+  const submit = document.createElement("button");
+  submit.innerText = "Submit";
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let name = input.value.trim();
+    if (name) {
+      console.log(`name: ${name}`);
+      let p = document.createElement("p");
+      p.innerText = `your name:${name}`;
+      container.appendChild(p);
+    } else {
+      console.log("enter name");
+    }
+
+    alert(`Hello, ${input.value}!`);
+  });
+  form.appendChild(submit);
+  container.appendChild(form);
+</script>
