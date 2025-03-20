@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="'text" id="todo" placeholder="Add todo" />
+    <button id="button">Add</button>
+    <div id="container"></div>
+  </body>
+</html>
+<script>
+  let container = document.getElementById("container");
+  let AddBtn = document.getElementById("button");
+  let input = document.getElementById("todo");
+  AddBtn.addEventListener("click", () => {
+    let newTodo = input.value.trim();
+    console.log(newTodo);
+    if (input.value !== "") {
+      addTodo(newTodo);
+      input.value = "";
+    }
+  });
+  function addTodo(text) {
+    let div = document.createElement("div");
+    div.className = "item";
+    let span = document.createElement("span");
+    span.innerText = text;
+    div.appendChild(span);
+    //container.appendChild(div);
+
+    //delete
+    let deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "Delete";
+    deleteBtn.addEventListener("click", () => {
+      container.removeChild(div);
+      alert("delete successfully");
+    });
+
+    //edit
+    let editBtn = document.createElement("button");
+    editBtn.innerText = "Edit";
+    editBtn.addEventListener("click", () => {
+      let newText = prompt("Enter new text", text);
+      span.innerText = newText;
+    });
+    div.appendChild(editBtn);
+    div.appendChild(deleteBtn);
+    container.appendChild(div);
+  }
+</script>

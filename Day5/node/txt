@@ -1,0 +1,27 @@
+import { DatabaseSync } from "node:sqlite"
+import { AWSTempCredentials } from './node_modules/mongoose/node_modules/mongodb/src/cmap/auth/aws_temporary_credentials';
+
+//create folder
+initialize the 
+npm init -y(package.json file create automattically)
+
+dependencies:npm i express
+(package-Lock,nodemodals)
+touch indexedDB.js(create file)
+mkdir folder name(create folder)
+
+for Database
+npm i mongoose (mongodb)
+for environment variabble
+npm i dotenv
+
+for automatically run your server
+npm i nodemon
+create file .env(put db url,port,jwt_secret,cloudanary etc)
+
+create config folder for connect Database
+we use mongodb Atlas(it is stored any where)
+(npm i mongodb)
+
+inside config create db.js file
+
