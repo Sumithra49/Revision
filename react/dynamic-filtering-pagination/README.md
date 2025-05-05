@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+Advanced Assignment: Dynamic Filters, Pagination, and API Data Synchronization
+Objective:
+Build a React app that fetches and displays data from a public API with multiple dynamic filters (not just search), server-side pagination, and proper synchronization between filters and pagination.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Requirements:
 
-## Available Scripts
+API Fetching with Filters:
 
-In the project directory, you can run:
+Use a public API (like https://jsonplaceholder.typicode.com or another you choose) that can simulate multiple filter parameters.
+Create at least two filters — for example:
+Filter by category (or user ID).
+Filter by status or tag (you can mock this if the API lacks it).
+When the user changes a filter, reset the page number to 1 and fetch fresh results.
+Server-Side Pagination:
 
-### `npm start`
+Fetch 10 results per page.
+Include Next and Previous buttons for navigating pages.
+Display the current page and total pages (you can calculate this if the API provides total item count).
+State Management with Synchronization:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Use useState to manage:
+Active filters.
+Current page.
+Fetched data.
+Loading and error states.
+Use useEffect to trigger the correct API calls whenever filters or page change.
+Make sure the filters and pagination are synchronized — changing a filter should not leave the user on an invalid page.
+Error Handling:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Display a clear error message if the API request fails.
+Show a loading spinner or message while waiting for data.
+User Interface:
 
-### `npm test`
+Show the list of results.
+Show the active filters and allow the user to clear/reset them.
+Disable the Next button on the last page and the Previous button on the first page.
+Bonus Challenges (Optional but Stretching):
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Add a refresh button to manually re-fetch the current data.
+Use AbortController to cancel in-flight requests when the user changes filters or pages rapidly.
+Use a dropdown or checkbox list for filters (not just text inputs).
+Show a summary bar displaying the total number of items matching the current filters.
