@@ -17,22 +17,27 @@ PAHNAPLSIIGYIR
 ## Number pyramid
 
 Enter number of rows: 4
-1
-1 2 1
-1 2 3 2 1
-1 2 3 4 3 2 1
+        1 
+      1 2 1 
+    1 2 3 2 1 
+  1 2 3 4 3 2 1 
+1 2 3 4 5 4 3 2 1 
+
 
 ## Hourglass
 
 Enter number of rows: 3
 
----
+*********
+ *******
+  *****
+   ***
+    *
+   ***
+  *****
+ *******
+*********
 
----
-
-- ***
-
-  ***
 
 ## diamond pattern
 
@@ -40,3 +45,11 @@ Enter number of rows (half of diamond): 4
 ![alt text](image.png)
 
 === Code Execution Successful ===
+
+## pascal
+ 1
+1  1
+1 2 1
+1 3 3 1
+1 4 6 4 1
+
