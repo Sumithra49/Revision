@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+      input,
+      select,
+      button {
+        margin: 5px;
+        padding: 8px;
+      }
+      #taskList {
+        list-style-type: none;
+        padding: 0;
+      }
+      .task {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      .actions {
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Create a New Task</h2>
+    <form id="taskForm">
+      <input type="text" id="title" placeholder="Title" required />
+      <input type="text" id="description" placeholder="Description" required />
+      <select id="status">
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+      <input type="date" id="dueDate" />
+      <button type="submit">Add Task</button>
+    </form>
+
+    <h2>All Tasks</h2>
+    <ul id="taskList"></ul>
+
+    <!-- Edit Form -->
+    <div id="editSection" style="display: none">
+      <h2>Edit Task</h2>
+      <form id="editForm">
+        <input type="text" id="editTitle" placeholder="Title" />
+        <input type="text" id="editDescription" placeholder="Description" />
+        <select id="editStatus">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+        <input type="date" id="editDueDate" />
+        <button type="submit">Update Task</button>
+      </form>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
