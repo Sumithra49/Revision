@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM Example</title>
+  </head>
+  <body>
+    <h2>DOM Manipulation</h2>
+
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+    <button onclick="greetUser()">Greet</button>
+
+    <p id="greetingText">Your greeting will appear here.</p>
+
+    <script>
+      function greetUser() {
+        const name = document.getElementById("nameInput").value;
+        const greeting = document.getElementById("greetingText");
+
+        if (name.trim() === "") {
+          greeting.textContent = "Please enter your name.";
+        } else {
+          greeting.textContent = `Hello, ${name}!`;
+        }
+      }
+    </script>
+  </body>
+</html>

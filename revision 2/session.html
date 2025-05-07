@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Session Storage Example</title>
+  </head>
+  <body>
+    <h2>Session Storage</h2>
+
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+    <button onclick="saveName()">Save</button>
+    <button onclick="showName()">Show</button>
+
+    <p id="output"></p>
+
+    <script>
+      function saveName() {
+        const name = document.getElementById("nameInput").value;
+        sessionStorage.setItem("userName", name);
+        alert("Name saved in session storage!");
+      }
+
+      function showName() {
+        const storedName = sessionStorage.getItem("userName");
+        document.getElementById("output").textContent = storedName
+          ? `Hello, ${storedName}!`
+          : "No name found in session storage.";
+      }
+    </script>
+  </body>
+</html>

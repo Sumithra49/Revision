@@ -1,0 +1,120 @@
+//reverse of the string
+import { js } from '@eslint/js';
+import { react } from '@vitejs/plugin-react';
+import FormComponent from './../Day6/React/Formvalidation';
+function reverseString(str) {
+  let reversed = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversed += str[i];
+  }
+  return reversed;
+}
+
+console.log(reverseString("hello")); // "olleh"
+const reversed = "hello".split("").reverse().join("");
+console.log(reversed); // "olleh"
+
+let s = "sumithra";
+for (let i = s.length - 1; i >= 0; i--) {
+  console.log(s[i]);
+}
+
+1. What is a Promise?
+A Promise in JavaScript represents the result of an asynchronous operation. It can be in one of three states:
+
+pending (initial),
+
+fulfilled (resolved successfully),
+
+rejected (an error occurred).
+
+Example:
+
+javascript
+Copy
+Edit
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Done!"), 1000);
+});
+promise.then(data => console.log(data));
+2. == vs ===
+== (loose equality): compares values after type conversion.
+
+=== (strict equality): compares both value and type.
+
+Example:
+
+javascript
+Copy
+Edit
+console.log(5 == "5");  // true
+console.log(5 === "5"); // false
+3. let vs const vs var
+Keyword	Scope	Reassignable	Redeclarable	Hoisted
+var	function	✅	✅	✅ (but undefined)
+let	block	✅	❌	✅ (but not initialized)
+const	block	❌	❌	✅ (but not initialized)
+
+Use let for variables that change, and const for constants.
+
+4. Client vs Server
+Client	Server
+Runs in browser	Runs on backend (e.g., Node.js)
+Handles UI & user interaction	Handles logic, database, APIs
+Example: React app	Example: Express.js app
+
+5. What is JavaScript (JS)?
+JavaScript is a high-level, dynamic programming language used to make websites interactive (e.g., buttons, forms, animations). It runs in the browser and also on servers (via Node.js).
+
+6. Class Component in React
+A class component is a React component defined using a class. It can hold state and lifecycle methods.
+
+Example:
+
+jsx
+Copy
+Edit
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+  render() {
+    return <div>{this.state.count}</div>;
+  }
+}
+7. Function vs Class Component
+Feature	Function Component	Class Component
+Syntax	Function-based	Class-based (extends React.Component)
+State	With useState() hook	With this.state
+Lifecycle	With hooks (e.g. useEffect)	With lifecycle methods
+Simpler syntax	✅	❌
+Performance	Slightly better	Slightly worse
+
+8. How to validate a form in JS
+Use JavaScript to check if fields meet certain conditions before submitting.
+
+
+function validateForm() {
+  let name = document.getElementById("name").value;
+  if (name === "") {
+    alert("Name is required");
+    return false;
+  }
+  return true;
+}
+9. Lifecycle Methods (React Class Components)
+Method	Phase	Description
+constructor	Mounting	Initialization
+componentDidMount	Mounting	Called after first render
+shouldComponentUpdate	Updating	Determines if re-render is needed
+componentDidUpdate	Updating	Called after re-render
+componentWillUnmount	Unmounting	Cleanup before component is removed
+
+
+Split into 3 components:
+Form — main parent component
+
+InputField — reusable text input field
+
+ErrorMessage — reusable error display
