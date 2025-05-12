@@ -1,0 +1,48 @@
+body.light {
+  background: #f9f9f9;
+  color: #333;
+}
+
+body.dark {
+  background: #121212;
+  color: white;
+}
+
+.app {
+  padding: 1rem;
+}
+
+.page {
+  max-width: 500px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.card {
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  background: #007bff;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.toast {
+  margin-top: 1rem;
+  background: #28a745;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+}
