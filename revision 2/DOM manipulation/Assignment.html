@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+  <script>
+    let usersData = [
+      {
+        id: 1,
+        email: "george.bluth@reqres.in",
+        first_name: "George",
+        last_name: "Bluth",
+        avatar: "https://reqres.in/img/faces/1-image.jpg",
+      },
+      {
+        id: 2,
+        email: "janet.weaver@reqres.in",
+        first_name: "Janet",
+        last_name: "Weaver",
+        avatar: "https://reqres.in/img/faces/2-image.jpg",
+      },
+      {
+        id: 3,
+        email: "emma.wong@reqres.in",
+        first_name: "Emma",
+        last_name: "Wong",
+        avatar: "https://reqres.in/img/faces/3-image.jpg",
+      },
+      {
+        id: 4,
+        email: "eve.holt@reqres.in",
+        first_name: "Eve",
+        last_name: "Holt",
+        avatar: "https://reqres.in/img/faces/4-image.jpg",
+      },
+      {
+        id: 5,
+        email: "charles.morris@reqres.in",
+        first_name: "Charles",
+        last_name: "Morris",
+        avatar: "https://reqres.in/img/faces/5-image.jpg",
+      },
+      {
+        id: 6,
+        email: "tracey.ramos@reqres.in",
+        first_name: "Tracey",
+        last_name: "Ramos",
+        avatar: "https://reqres.in/img/faces/6-image.jpg",
+      },
+    ];
+    //create card
+    function createCard(item) {
+      let div = document.createElement("div");
+      div.setAttribute("class", "usercard");
+      div.id = item.id;
+      let img = document.createElement("img");
+      img.src = item.avatar;
+      let name = document.createElement("h3");
+      name.innerText = `${item.first_name} ${item.last_name}`;
+      let p = document.createElement("p");
+      p.innerText = item.email;
+
+      div.append(img, name, p);
+      return div;
+    }
+    usersData.forEach((item) => {
+      let container = document.getElementById("container");
+      let card = createCard(item);
+      container.append(card);
+    });
+  </script>
+</html>

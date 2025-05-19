@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <style>
+      .btn {
+        background-color: red;
+        border: 1px solid red;
+        height: 30px;
+        color: white;
+      }
+    </style> -->
+  </head>
+  <body>
+    <div id="container1">
+      <!-- <div class="card">
+        <h3>card Title</h3>
+        <p>This is the context</p>
+        <button class="btn">Click me</button>
+      </div> -->
+    </div>
+    <script>
+      // let div = document.createElement("div"); //<div></div>
+      // //class is card i.e any attribute we can create
+      // div.setAttribute("class", "card");
+
+      // let h3 = document.createElement("h3"); //<h3></h3>
+      // //set (innerText,textContent,innerHTML) 3 methods are used for give the text
+      // h3.textContent = "card Title";
+      // let p = document.createElement("p"); //<p></p>
+      // //content
+      // p.innerText = "This is the context";
+      // let btn = document.createElement("button"); //<button></button>
+      // btn.setAttribute("class", "btn");
+      // btn.innerText = "Click Me";
+      //suppose some one click on button i want to do something
+      //so i can use addEventListen(type,submit,scroll,click)
+      //btn.addEventListener(type of event,callback function) //2 parameter
+      //callback function syntax ()=>{}
+      // btn.addEventListener("click", () => {
+      //   console.log("button clicked");
+      //   //show alert message
+      //   alert("button clicked");
+      // });
+
+      //when you pass eventtype
+      // btn.addEventListener("click", (e) => {
+      //   console.log(e); //give the event object ,target
+      //   console.log(e.target); //button tags code
+      //   console.log(e.target.parentElement); // given card
+      //   alert(e.target.parentElement.children[1].innerText); //these is the context shoing p tag
+      // });
+      //append h3,p,btn into div
+
+      // div.append(h3, p, btn);
+
+      // //show these in my html page
+      // let container = document.getElementById("container1");
+
+      // //append the div into container
+      // container.append(div);
+
+      const cards = [
+        { title: "Card 1", content: "Content for card 1" },
+        { title: "Card 2", content: "Content for card 2" },
+        { title: "Card 3", content: "Content for card 3" },
+        { title: "Card 4", content: "Content for card 4" },
+        { title: "Card 5", content: "Content for card 5" },
+      ];
+      cards.forEach((item) => {
+        let div = document.createElement("div"); //<div></div>
+
+        div.setAttribute("class", "card");
+
+        let h3 = document.createElement("h3"); //<h3></h3>
+
+        h3.textContent = item.title;
+        let p = document.createElement("p"); //<p></p>
+
+        p.innerText = item.content;
+        let btn = document.createElement("button"); //<button></button>
+        btn.setAttribute("class", "btn");
+        btn.innerText = "Click Me";
+        btn.addEventListener("click", (e) => {
+          alert(e.target.parentElement.children[1].innerText); //these is the context shoing p tag
+        });
+        div.append(h3, p, btn);
+
+        //show these in my html page
+        let container = document.getElementById("container1");
+
+        //append the div into container
+        container.append(div);
+      });
+    </script>
+  </body>
+</html>

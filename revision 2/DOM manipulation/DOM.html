@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* #container1 > p.item:nth-child(3) {
+        color: red;
+      } */
+    </style>
+  </head>
+
+  <body>
+    <div id="container1">
+      <p class="item">item 1</p>
+      <p class="item">item 2</p>
+      <p class="item">item 3</p>
+      <p class="item">item 4</p>
+      <p class="item">item 5</p>
+    </div>
+    <div id="container2">
+      <p class="content">heading 1</p>
+      <p class="content">heading 2</p>
+      <p class="content">heading 3</p>
+    </div>
+    <div id="container3">
+      <h1 class="content">head1</h1>
+      <h1 class="content">head2</h1>
+      <h1 class="content">head3</h1>
+    </div>
+    <script>
+      //   console.log(document);
+      //   console.dir(document); //serveral keys
+      //   console.log(typeof document); //object
+      //want access head
+      //   console.log(document.head);//give all head tag
+      //   //body
+      //   console.log(document.body);
+      //access title
+      //   console.log(document.getElementById("container1"));
+
+      //if you want access any elemnt having id we use document.getElementById
+
+      // if ypu want access any element by class name
+      //document.getElementsByClassName
+      //console.log(document.getElementsByClassName("item"));
+
+      //access by tagname
+      //console.log(document.getElementsByTagName("p"));
+
+      //querySelector(Id,class,sibling ,combined selector)
+      //   let container1 = document.querySelector("#container1");
+      //   console.log(container1);
+
+      //let item = document.querySelector(".item");
+      //console.log(item);//it will give always first elemnt
+
+      //if you want select all("")
+      //   let item = document.querySelectorAll(".item");
+      //   console.log(item);
+
+      //suppose we use particular element
+      //   let item = document.querySelector("#container1 > p.item:nth-child(3)");
+      //   console.log(item);
+
+      //how to change the attributes,styles
+      // let p = document.querySelector("#container1 > p.item:nth-child(2)");
+      // p.style.color = "red";
+      // p.style.backgroundColor = "green";
+      // p.style.marginLeft = "20px";
+
+      //task
+      //select the html elemnt with id container1 and add border 1px solid black
+      //select all the elements with the class item and change the text color to blue
+      //select all the p tag elements and change the background color to yellow.
+      //change the background color of the 2nd h1 tag to yellow
+      // let div = document.getElementById("container1");
+      // div.style.border = "1px solid black";
+
+      // let item = document.getElementsByClassName("item");
+      // item.style.color = "blue";
+
+      // let para = document.querySelectorAll("p");
+      // para.style.backgroundColor = "yellow";
+
+      // let h1 = document.querySelector("#container3>h1.content:nth-child(2)");
+      // h1.style.backgroundColor = "yellow";
+      // console.log(h1.innerHTML);
+
+      //suppose i need to change the text ,all are same
+      // 1)innerText
+      // 2)textContent
+      //3)innerHTML
+      // h1.innerText = "hello";
+      // h1.innerHTML = "Hi";
+      // h1.textContent = "Bye";
+      // //add anchor tag
+      // h1.innerHTML = "<a href=#>item4</a>";
+
+      //loop over the elements
+      // i want change the elemts where class name is .item and change the color index is even is blue otherwise red
+      // let p = document.querySelectorAll("#container1>p.item:nth-child(even)");
+      // //console.log(p);
+      // //like array structure
+      // //p.forEach(()=>{})  syntax
+      // p.forEach((item) => {
+      //   item.style.color = "red";
+      // });
+      // let p1 = document.querySelectorAll("#container1>p.item:nth-child(odd)");
+      // p1.forEach((item) => {
+      //   item.style.color = "green";
+      // });
+      //Another way
+      let p = document.getElementsByClassName("item");
+      // for (let i = 0; i < p.length; i++) {
+      //   if (i % 2) {
+      //     p[i].style.color = "red";
+      //   } else {
+      //     p[i].style.color = "green";
+      //   }
+      // }
+      // apply all elemnet
+      // for (let item of p) {
+      //   item.style.color = "red";
+      // }
+
+      //task
+      //change the backgroundcolor  to all of all the p tag havinhg add index
+    </script>
+  </body>
+</html>

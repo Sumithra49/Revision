@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <img />
+    </div>
+    <script>
+      const cards = [
+        { title: "Card 1", content: "Content for card 1" },
+        { title: "Card 2", content: "Content for card 2" },
+        { title: "Card 3", content: "Content for card 3" },
+        { title: "Card 4", content: "Content for card 4" },
+        { title: "Card 5", content: "Content for card 5" },
+      ];
+
+      //create single card
+      function createCard(item) {
+        let div = document.createElement("div"); //<div></div>
+
+        div.setAttribute("class", "card");
+
+        let h3 = document.createElement("h3"); //<h3></h3>
+
+        h3.textContent = item.title;
+        let p = document.createElement("p"); //<p></p>
+
+        p.innerText = item.content;
+        let btn = document.createElement("button"); //<button></button>
+        btn.setAttribute("class", "btn");
+        btn.innerText = "Click Me";
+        btn.addEventListener("click", (e) => {
+          alert(e.target.parentElement.children[1].innerText); //these is the context shoing p tag
+        });
+        div.append(h3, p, btn);
+
+        //show these in my html page
+        // let container = document.getElementById("container1");
+
+        // //append the div into container
+        // container.append(div);
+        return div;
+      }
+      //   cards.forEach((item) => {
+      //     let container = document.getElementById("container");
+      //     let card = createCard(item);
+      //     container.append(card);
+      //   });
+      // or
+      //append the data into DOM
+
+      function appendData(data) {
+        data.forEach((item) => {
+          let Container = document.getElementById("container");
+          //card
+          let card = createCard(item);
+          container.append(card);
+        });
+      }
+      appendData(cards);
+
+      //adding class name
+      //   div.className
+      //   div.setAttribute
+      //   div.classList.add(more class you added)
+      //romove
+      div.classList.remove("which one you need to delete");
+      div.classList.toggle("classs1"); // it will check class name is exit or not if not these is add the class and if exist it will removed
+
+      //suppose create img
+      let img = document.querySelector("img");
+      //img.setAttribute("src","url");
+      //or
+      // img.src=""
+      img.id = "image1";
+    </script>
+  </body>
+</html>
