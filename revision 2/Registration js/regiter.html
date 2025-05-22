@@ -21,7 +21,9 @@
     let inputPassword = document.getElementById("password");
     let submitBtn = document.getElementById("submitbtn");
     const users = [];
-    submitBtn.addEventListener("click", () => {
+    submitBtn.addEventListener("click", handleSubmit);
+
+    function handleSubmit() {
       let name = inputName.value.trim();
       let email = inputEmail.value.trim();
       let password = inputPassword.value.trim();
@@ -34,7 +36,7 @@
         inputEmail.value = "";
         inputPassword.value = "";
       }
-    });
+    }
     function dispalydata() {
       let result = document.getElementById("userlist");
       result.innerHTML = "";
