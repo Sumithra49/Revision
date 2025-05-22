@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="pagination"></div>
+    <input type="text" id="title" />
+    <input type="text" id="body" />
+    <button id="add">Add</button>
+    <input type="text" id="updateTitle" />
+    <input type="text" id="updateBody" />
+    <button id="update">Update</button>
+
+    <button id="sortA">Sort A</button>
+  </body>
+  <script>
+    let urlData = "https://jsonplaceholder.typicode.com/posts";
+    let pagination = document.getElementById("pagination");
+    let inputTitle = document.getElementById("title");
+    let inputBody = document.getElementById("body");
+    let addBtn = document.getElementById("add");
+    let updateTitle = document.getElementById("updateTitle");
+    let updateBody = document.getElementById("updateBody");
+    let updateBtn = document.getElementById("update");
+
+    //sort
+
+    let sortAtoZ = document.getElementById("sortA");
+    sortAtoZ.addEventListener("click", () => {
+      fetchData(`${urlData}?_page=1&_limit=5`, "_sort=title&_order=asc");
+    });
+
+    updateBtn.addEventListener("click", updateData);
+    addBtn.addEventListener("click", addData);
+
+    let pageNumber = 1;
+    let currentEditId = null;
+    let queryParamString = null;
+
+    //to fetch data
+    async function fetchData(url, queryParamString = "") {
+      try {
+        //beacuse limit use cheyadam valana sorting anedi first page matrame work avuthundi,now changed
+        let res = await fetch(`${url}&${queryParamString}`);
+        //to do pagination
+        let totalData = res.headers.get("X-Total-Count");
+        let limit = 5;
+        let TotalPage = Math.ceil(totalData / limit);
+        paginate(TotalPage, queryParamString);
+        let data = await res.json();
+        console.log(data);
+
+        appendData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData(`${urlData}?_page=1&_limit=5`);
+    //to create a crad
+    function createCard(item) {
+      let card = document.createElement("div");
+      card.className = "card";
+
+      let title = document.createElement("h1");
+      title.className = "card-title";
+      title.innerText = item.title;
+      let body = document.createElement("p");
+      body.innerText = item.body;
+      let updateBtn = document.createElement("button");
+      updateBtn.innerText = "EDit";
+      updateBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        updateTitle.value = item.title;
+        updateBody.value = item.body;
+        currentEditId = item.id;
+      });
+      let deleteBtn = document.createElement("button");
+      deleteBtn.innerHTML = "Delete";
+      deleteBtn.addEventListener("click", () => {
+        deleteData(item.id);
+      });
+      card.append(title, body, updateBtn, deleteBtn);
+      return card;
+    }
+    //to append the data into main container
+    function appendData(data) {
+      let container = document.getElementById("container");
+      //clean up the data in conatiner
+      container.innerHTML = ""; //clear previos data
+      data.forEach((item) => {
+        let card = createCard(item);
+        container.append(card);
+      });
+    }
+
+    //to do the pagination
+    function paginate(TotalPage, queryParamString) {
+      //cleanup of pagination
+      pagination.innerHTML = ""; //remove duplicate button creation,line lekapote button click cheste malli anni buttons create avuthai content anedi old a,new data cupistundi
+      //craete button,appending button in the pagiination
+      for (let i = 1; i <= TotalPage; i++) {
+        let btn = document.createElement("button");
+        btn.innerText = i;
+        //add event listener
+        btn.addEventListener("click", () => {
+          fetchData(`${urlData}?_page=${i}&_limit=5`, queryParamString);
+        });
+        pagination.append(btn);
+      }
+    }
+    //to create new data
+    async function addData() {
+      try {
+        let jsonData = {
+          title: inputTitle.value,
+          body: inputBody.value,
+        };
+        let res = await fetch(urlData, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(jsonData),
+        });
+        let data = await res.json();
+        console.log(data);
+        //showing the updated information in ui
+        // fetchData(`${urlData}?_page=1&_limit=5`);
+        // Add new post to top of UI directly (instead of re-fetch)
+        let container = document.getElementById("container");
+        container.prepend(createCard(data));
+
+        // Clear the input fields
+        inputTitle.value = "";
+        inputBody.value = "";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    //to do delete
+    async function deleteData(id) {
+      try {
+        let res = await fetch(`${urlData}/${id}`, {
+          method: "DELETE",
+        });
+        let data = await res.json();
+        console.log(data);
+        //showing the updated information in ui
+        fetchData(`${urlData}?_page=1&_limit=5`);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    async function updateData() {
+      if (!currentEditId) {
+        alert("Select a post to update by clicking 'Edit'");
+        return;
+      }
+      try {
+        let jsonData = {
+          title: updateTitle.value,
+          body: updateBody.value,
+        };
+        let res = await fetch(`${urlData}/${currentEditId}`, {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(jsonData),
+        });
+        let data = await res.json();
+        console.log("Updated:", data);
+        fetchData(`${urlData}?_page=1&_limit=5`);
+        updateTitle.value = "";
+        updateBody.value = "";
+        currentEditId = null;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+
+  <!-- 
+//why using query parameter because limit undatam valana oak page matrame sort avuthundi ade queryParamString use cheste anni pages sort avuthai -->
+</html>

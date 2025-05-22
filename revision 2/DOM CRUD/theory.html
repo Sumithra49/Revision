@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+  <script>
+    let container = document.getElementById("container");
+    let apiLink = "https://jsonplaceholder.typicode.com/posts";
+    //fetch the data in two ways using .then,.catch and using async function try,catchblaock
+    // let res = fetch(apiLink);
+    // console.log(res); //return one promise  using above 2 ways
+    // res.then(()=>{}).catch(()=>{});syntax
+
+    // res
+    //   .then((item) => {
+    //     // console.log(item); //response in body is ReadebaleStream(backend send the data small small chunks)
+    //     //convert the data into json
+    //     //console.log(item.json())//again promise use again .then
+    //     return item.json().then((data) => {
+    //       //console.log(data);//now getting the data
+    //       //i need show in ui
+    //       data.forEach((i) => {
+    //         let p = document.createElement("p");
+    //         p.innerText = i.title;
+    //         p.style.border = "1px solid black";
+    //         container.append(p);
+    //       });
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    //using async
+    async function fetchData() {
+      try {
+        let res = await fetch(apiLink);
+        console.log(res); //readablesteam
+        let data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+
+    //add the data
+    async function name(params) {
+      try {
+        //       let newdata={data we passed whatever you need like above title,body}
+        //let
+        //  res=await fetch(url,{});
+        //in the object we passed
+        let res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    //patch method
+    async function patchData() {
+      try {
+        //what you want edit
+        let editData = { title };
+        let res = await fetch(`${apiLink}/id`, {
+          method: "PATCH",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(editData),
+        });
+        let data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    //to edit the data using put method
+    //async function name(params) {
+    async function putData() {
+      try {
+        //used to edit all data
+        let empData = { name: "sun", body: "" };
+        let res = await fetch(`${apiLink}/id`, {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(empData),
+        });
+        let data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    //delete the data
+    async function deleteData() {
+      try {
+        let res = await fetch(`${apiLink}/id`, {
+          method: "DELETE",
+        });
+        let data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    // when give ? i.t we pass queryparams
+    //_sort means which content you wnat sort and _order means is asc(low -high or a-z) order or desc(high-low or z-a) order
+    //sort the data /posts?_sort=title&_order=asc
+    //suppose salary is greater thn 20000 or less than 20000(salary_lte=200000)
+    //`${url link)?salary_gte=20000`
+    // these sort and gte button addEventListener and fetchdata(`${url link)?salary_gte=20000`)
+  </script>
+</html>

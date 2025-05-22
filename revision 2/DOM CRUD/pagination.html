@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="pagination"></div>
+  </body>
+  <script>
+    let pagination = document.getElementById("pagination");
+    let pageNumber = 1;
+    let urlData = "https://jsonplaceholder.typicode.com/posts";
+    //to fetch data
+    async function fetchData(url) {
+      try {
+        let res = await fetch(url);
+        //to do pagination
+        let totalData = res.headers.get("X-Total-Count");
+        let limit = 5;
+        let TotalPage = Math.ceil(totalData / limit);
+        //cleanup of pagination
+        pagination.innerHTML = ""; //remove duplicate button creation,line lekapote button click cheste malli anni buttons create avuthai content anedi old a,new data cupistundi
+        //craete button,appending button in the pagiination
+        for (let i = 1; i <= TotalPage; i++) {
+          let btn = document.createElement("button");
+          btn.innerText = i;
+          //add event listener
+          btn.addEventListener("click", () => {
+            fetchData(`${urlData}?_page=${i}&_limit=5`);
+          });
+          pagination.append(btn);
+        }
+
+        let data = await res.json();
+        console.log(data);
+
+        appendData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData(`${urlData}?_page=1&_limit=5`);
+    //to create a crad
+    function createCard(item) {
+      let card = document.createElement("div");
+      card.className = "card";
+
+      let title = document.createElement("h1");
+      title.className = "card-title";
+      title.innerText = item.title;
+      let body = document.createElement("p");
+      body.innerText = item.body;
+      card.append(title, body);
+      return card;
+    }
+    //to append the data into main container
+    function appendData(data) {
+      let container = document.getElementById("container");
+      //clean up the data in conatiner
+      container.innerHTML = ""; //clear previos data
+      data.forEach((item) => {
+        let card = createCard(item);
+        container.append(card);
+      });
+    }
+  </script>
+</html>

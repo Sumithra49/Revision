@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="mainContent">
+      <input type="text" placeholder="enter name" id="name" />
+      <input type="email" placeholder="enter email" id="email" />
+      <input type="password" placeholder="enter password" id="password" />
+      <button id="submitbtn">Submit</button>
+      <div id="userlist"></div>
+    </div>
+  </body>
+  <script>
+    let mainContent = document.getElementById("mainContent");
+    let inputName = document.getElementById("name");
+    let inputEmail = document.getElementById("email");
+    let inputPassword = document.getElementById("password");
+    let submitBtn = document.getElementById("submitbtn");
+    const users = [];
+    submitBtn.addEventListener("click", () => {
+      let name = inputName.value.trim();
+      let email = inputEmail.value.trim();
+      let password = inputPassword.value.trim();
+      if (name && email && password) {
+        const user = { name, email, password };
+        users.push(user);
+        dispalydata();
+
+        inputName.value = "";
+        inputEmail.value = "";
+        inputPassword.value = "";
+      }
+    });
+    function dispalydata() {
+      let result = document.getElementById("userlist");
+      result.innerHTML = "";
+      users.forEach((user, index) => {
+        let div = document.createElement("div");
+
+        div.innerHTML = `<p>${user.name}</p>
+      <p>${user.email}</p>`;
+        result.append(div);
+      });
+    }
+
+    //edit the data
+    function editDate(index) {
+      let user = users[index];
+      //which data you edit
+      inputName.value = user.name;
+      inputEmail.value = user.email;
+      inputPassword.value = user.password;
+      submitBtn.textContent = "Update";
+    }
+  </script>
+</html>
