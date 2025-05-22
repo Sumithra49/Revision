@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Operation without window</title>
+    <style>
+      #userlist div {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 300px;
+      }
+      button {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mainContent">
+      <input type="text" placeholder="Enter name" id="name" />
+      <input type="email" placeholder="Enter email" id="email" />
+      <input type="password" placeholder="Enter password" id="password" />
+      <button id="submitbtn">Submit</button>
+      <button id="showbtn">Show Users</button>
+      <div id="userlist"></div>
+    </div>
+
+    <script>
+      const inputName = document.getElementById("name");
+      const inputEmail = document.getElementById("email");
+      const inputPassword = document.getElementById("password");
+      const submitBtn = document.getElementById("submitbtn");
+      const showBtn = document.getElementById("showbtn");
+      const userList = document.getElementById("userlist");
+
+      let users = [];
+      let editIndex = -1;
+
+      submitBtn.addEventListener("click", () => {
+        const name = inputName.value.trim();
+        const email = inputEmail.value.trim();
+        const password = inputPassword.value.trim();
+
+        if (name && email && password) {
+          const user = { name, email, password };
+
+          if (editIndex === -1) {
+            users.push(user);
+          } else {
+            users[editIndex] = user;
+            editIndex = -1;
+            submitBtn.textContent = "Submit";
+          }
+
+          clearInputs();
+          alert("User saved! Click 'Show Users' to view data.");
+        } else {
+          alert("Please fill all fields.");
+        }
+      });
+
+      showBtn.addEventListener("click", displayData);
+
+      function displayData() {
+        userList.innerHTML = "";
+
+        users.forEach((user, index) => {
+          const div = document.createElement("div");
+
+          const nameP = document.createElement("p");
+          nameP.textContent = `Name: ${user.name}`;
+
+          const emailP = document.createElement("p");
+          emailP.textContent = `Email: ${user.email}`;
+
+          const editBtn = document.createElement("button");
+          editBtn.textContent = "Edit";
+          editBtn.addEventListener("click", () => editUser(index));
+
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "Delete";
+          deleteBtn.addEventListener("click", () => deleteUser(index));
+
+          div.appendChild(nameP);
+          div.appendChild(emailP);
+          div.appendChild(editBtn);
+          div.appendChild(deleteBtn);
+
+          userList.appendChild(div);
+        });
+      }
+
+      function clearInputs() {
+        inputName.value = "";
+        inputEmail.value = "";
+        inputPassword.value = "";
+      }
+
+      function editUser(index) {
+        const user = users[index];
+        inputName.value = user.name;
+        inputEmail.value = user.email;
+        inputPassword.value = user.password;
+        submitBtn.textContent = "Update";
+        editIndex = index;
+      }
+
+      function deleteUser(index) {
+        users.splice(index, 1);
+        displayData();
+      }
+    </script>
+  </body>
+</html>
