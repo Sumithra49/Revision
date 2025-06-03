@@ -1,0 +1,85 @@
+Given a MongoDB collection named products, perform the following:
+
+Insert sample products with fields:
+name, category, price, tags (array), stock, details (nested object)
+Write queries to:
+Find all products with price between 500 and 2000
+Find products that include either "smartphone" or "laptop" in tags
+Update all products in the "gadget" category to reduce stock by 5
+Delete products where stock is 0
+Use $regex to find products that start with the letter “A”
+Bonus:
+Write a query to get all products where details.warranty exists and is true
+
+1. Insert Sample Products
+   db.products.insertMany([
+   {
+   name: "Apple iPhone 14",
+   category: "gadget",
+   price: 1200,
+   tags: ["smartphone", "ios"],
+   stock: 15,
+   details: { warranty: true, color: "black" }
+   },
+   {
+   name: "Asus Zenbook",
+   category: "gadget",
+   price: 1800,
+   tags: ["laptop", "ultrabook"],
+   stock: 10,
+   details: { warranty: true, color: "silver" }
+   },
+   {
+   name: "Samsung Galaxy Tab",
+   category: "tablet",
+   price: 600,
+   tags: ["tablet", "android"],
+   stock: 0,
+   details: { warranty: false, color: "gray" }
+   },
+   {
+   name: "Acer Aspire",
+   category: "gadget",
+   price: 700,
+   tags: ["laptop", "windows"],
+   stock: 8,
+   details: { warranty: true, color: "blue" }
+   },
+   {
+   name: "Dell Monitor",
+   category: "accessory",
+   price: 300,
+   tags: ["monitor", "display"],
+   stock: 5,
+   details: { warranty: false, color: "black" }
+   }
+   ])
+
+2.Find all products with price between 500 and 2000
+db.products.find({
+price: { $gte: 500, $lte: 2000 }
+})
+
+3.Find products with either "smartphone" or "laptop" in tags
+db.products.find({
+tags: { $in: ["smartphone", "laptop"] }
+})
+
+4. Update all products in the "gadget" category to reduce stock by 5
+   db.products.updateMany(
+   { category: "gadget" },
+   { $inc: { stock: -5 } }
+   )
+
+5. Delete products where stock is 0
+   db.products.deleteMany({
+   stock: { $lte: 0 }
+   })
+6. Find products that start with the letter “A” (using $regex)
+   db.products.find({
+   name: { $regex: /^A/, $options: "i" } // case-insensitive
+   })
+   Bonus: Get products where details.warranty exists and is true
+   db.products.find({
+   "details.warranty": true
+   })
