@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+      .main-container {
+        padding: 20px;
+      }
+      .todo-list li {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <form id="todoForm">
+        <input type="text" placeholder="Enter todo title" />
+        <br /><br />
+        <input type="text" placeholder="Enter todo name" />
+        <br /><br />
+        <input type="text" placeholder="Task priority" />
+        <br /><br />
+        <button type="submit">Add</button>
+      </form>
+
+      <div class="todo-list">
+        <ul id="list"></ul>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("todoForm");
+      const list = document.getElementById("list");
+      let data = [];
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const title = e.target[0].value.trim();
+        const name = e.target[1].value.trim();
+        const priority = e.target[2].value.trim();
+
+        const obj = { title, name, priority };
+
+        data.push(obj); // store in array
+        console.log(data); // mimic useEffect in React
+
+        displayData();
+        form.reset();
+      });
+
+      function displayData() {
+        list.innerHTML = ""; // clear previous list
+
+        data.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.title}, ${item.name}, ${item.priority}`;
+          list.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>
