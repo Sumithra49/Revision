@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <input type="text" placeholder="enter here" id="input" />
+      <button id="btn">Add</button>
+    </div>
+    <div id="list"></div>
+  </body>
+</html>
+<script>
+  let input = document.getElementById("input");
+  let btn = document.getElementById("btn");
+  let list = document.getElementById("list");
+  const conatiner = document.getElementById("container");
+  let data = [];
+  let index = -1;
+  btn.addEventListener("click", () => {
+    addData();
+    displayData();
+  });
+  function addData() {
+    let name = input.value.trim();
+    if (name) {
+      let todo = { name };
+      if (index === -1) {
+        data.push(todo);
+      } else {
+        data[index] = todo;
+      }
+      input.value = "";
+      alert("dtata saved");
+    } else {
+      alert("provide todo");
+    }
+  }
+  function displayData() {
+    list.innerText = "";
+    data.forEach((i) => {
+      const div = document.createElement("div");
+      const title = document.createElement("p");
+      title.innerText = `${i.name}`;
+      div.append(title);
+      list.appendChild(div);
+    });
+  }
+</script>

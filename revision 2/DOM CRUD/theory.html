@@ -42,7 +42,13 @@
         let res = await fetch(apiLink);
         console.log(res); //readablesteam
         let data = await res.json();
-        console.log(data);
+        data.forEach((i) => {
+          let p = document.createElement("p");
+          p.innerText = i.title;
+          p.style.border = "1px solid black";
+          container.append(p);
+          console.log(data);
+        });
       } catch (error) {
         console.log(error);
       }
